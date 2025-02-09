@@ -1,0 +1,30 @@
+# Node.js
+/node_modules/
+/client/node_modules/
+/server/node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+/.env
+
+# Next.js build output
+/.next/
+/client/.next/
+
+# Vercel
+.vercel/
+
+# Mac system files
+.DS_Store
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+
+# Coverage reports (for testing)
+/coverage/
