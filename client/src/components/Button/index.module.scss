@@ -1,0 +1,22 @@
+.button {
+  background-color: #528569;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 15px;
+}
+
+.button:hover {
+  background-color: #90cfa5;
+  color: black;
+}
+
+.button:disabled {
+  background-color: #528569;
+  color: white;
+  opacity: 70%;
+  cursor: auto;
+}

@@ -1,0 +1,53 @@
+.wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.redirectText {
+  font-size: 15px;
+  .blueText {
+    color: blue;
+    padding-left: 5px;
+  }
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
+
+  input {
+    border-radius: 10px;
+    border-width: 1px;
+    padding: 15px;
+  }
+}
+
+.form {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.passwordContainer {
+  position: relative;
+}
+
+.passwordIcon {
+  position: absolute;
+  right: 12px;
+  top: 52%;
+  background: none;
+  border: none;
+  cursor: pointer;
+}

@@ -1,0 +1,18 @@
+.wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.redirectText {
+  font-size: 15px;
+  .blueText {
+    color: blue;
+    padding-left: 5px;
+  }
+}
