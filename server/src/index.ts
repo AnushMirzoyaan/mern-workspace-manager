@@ -11,7 +11,6 @@ const app = express();
 console.log("hey");
 
 app.use(express.json());
-app.use(cors());
 app.use(
   cors({
     origin: ["localhost:3000"],
