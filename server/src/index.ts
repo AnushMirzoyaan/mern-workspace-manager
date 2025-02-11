@@ -1,19 +1,21 @@
 import express from "express";
 import mongoose from "mongoose";
+import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import cors from "cors";
 import authRoutes from "./routes/authRoutes";
-import userRoutes from "./routes/userRoutes";
+import workspaceRoutes from "./routes/workspaceRoutes";
 
 dotenv.config();
 
 const app = express();
-console.log("hey");
+
+app.use(bodyParser.json());
 
 app.use(express.json());
 app.use(
   cors({
-    origin: ["localhost:3000"],
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
@@ -22,8 +24,13 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  console.log("CORS middleware applied");
+  next();
+});
+
 app.use("/api/auth", authRoutes);
-app.use("/api/user", userRoutes);
+app.use("/api/workspaces", workspaceRoutes);
 
 mongoose
   .connect(

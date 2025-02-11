@@ -6,7 +6,8 @@ import { AuthFormProps } from "@/utils/types";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import styles from "./index.module.scss";
-import axiosInstance from "@/services/axios";
+import { useRouter } from "next/navigation";
+import { signIn, signUp } from "@/services/auth/auth";
 
 const AuthForm: React.FC<AuthFormProps> = ({
   title,
@@ -27,6 +28,9 @@ const AuthForm: React.FC<AuthFormProps> = ({
     setIsPasswordVisible(!isPasswordVisible);
   const toggleConfirmPasswordVisibility = () =>
     setIsConfirmPasswordVisible(!isConfirmPasswordVisible);
+  // const auth = useAuth();
+
+  const router = useRouter();
 
   const isFormValid = email && password && (!isSignUp || confirmPassword);
 
@@ -45,33 +49,28 @@ const AuthForm: React.FC<AuthFormProps> = ({
       return;
     }
 
-    if (isSignUp && !passwordRegex.test(password)) {
-      toast.error(
-        "Password must be at least 8 characters long and contain at least one letter and one number."
-      );
-      return;
-    }
+    if (isSignUp) {
+      if (!passwordRegex.test(password)) {
+        toast.error(
+          "Password must be at least 8 characters long and contain at least one letter and one number."
+        );
+        return;
+      }
 
-    if (isSignUp && password !== confirmPassword) {
-      toast.error("Passwords do not match!");
-      return;
+      if (password !== confirmPassword) {
+        toast.error("Passwords do not match!");
+        return;
+      }
     }
-
     try {
-      const data = {
-        fullName,
-        email,
-        password,
-      };
-
-      const response = await axiosInstance.post("/signup", data);
-
-      toast.success(response.data.message);
+      if (isSignUp) {
+        await signUp({ fullName, email, password });
+      } else {
+        await signIn({ email, password });
+      }
+      router.push("/workspace-manager");
     } catch (error: any) {
-      console.log(error.message, "err>>>>>>>>>>>>>>>");
-      const errorMessage =
-        error.response?.data?.message || "An error occurred. Please try again.";
-      toast.error(errorMessage);
+      toast.error(error.message || "An error occurred. Please try again.");
     }
   };
 
@@ -146,18 +145,16 @@ const AuthForm: React.FC<AuthFormProps> = ({
               />
             </div>
           )}
-          <Button
-            text={buttonText}
-            onClick={handleSubmit}
-            disabled={!isFormValid}
-          />
+          <Button onClick={handleSubmit} disabled={!isFormValid}>
+            {buttonText}
+          </Button>
         </form>
 
         <p className={styles.redirectText}>
           {redirectText}
           <Link href={redirectLink}>
             <span className={styles.blueText}>
-              {redirectLink === "/sign-in" ? "Sign Up" : "Sign In"}
+              {redirectLink === "/sign-in" ? "Sign In" : "Sign Up"}
             </span>
           </Link>
         </p>

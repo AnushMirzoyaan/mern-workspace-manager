@@ -6,7 +6,7 @@ import { User } from "../models/User";
 const router = express.Router();
 
 router.post("/signup", async (req: any, res: any) => {
-  console.log("ekav stegh");
+  console.log("mtav signupi mej");
   try {
     const { fullName, email, password } = req.body;
 
@@ -26,7 +26,7 @@ router.post("/signup", async (req: any, res: any) => {
   }
 });
 
-router.post("/login", async (req: any, res: any) => {
+router.post("/signin", async (req: any, res: any) => {
   try {
     const { email, password } = req.body;
 
@@ -37,12 +37,16 @@ router.post("/login", async (req: any, res: any) => {
     if (!isMatch)
       return res.status(400).json({ message: "Invalid credentials" });
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET || "", {
-      expiresIn: "1h",
-    });
+    const accessToken = jwt.sign(
+      { userId: user._id },
+      process.env.JWT_SECRET || "secret",
+      { expiresIn: "1d" }
+    );
+
+    await user.save();
 
     res.json({
-      token,
+      accessToken,
       user: { id: user._id, fullName: user.fullName, email: user.email },
     });
   } catch (err) {

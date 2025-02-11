@@ -1,4 +1,4 @@
-import WorkspaceForm from "@/components/WorkspaceForm";
+import WorkspaceForm from "@/components/WorkspacesForm";
 import React from "react";
 
 const Page: React.FC = () => {
