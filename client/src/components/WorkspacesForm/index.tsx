@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import Image from "next/image";
 
 import {
   checkSlugAvailability,
@@ -80,13 +79,7 @@ const WorkspacesForm = ({ onWorkspaceCreated }: WorkspacesFormProps) => {
       <CardHeader>
         <CardTitle>Create Workspace</CardTitle>
       </CardHeader>
-      <Image
-        src="/add.svg"
-        alt=""
-        height={40}
-        width={40}
-        className={styles.icon}
-      />
+
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           <div className={styles.inputGroup}>
