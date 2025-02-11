@@ -40,6 +40,7 @@ const WorkspacesForm = ({ onWorkspaceCreated }: WorkspacesFormProps) => {
   }, []);
 
   const onSubmit = async (data: WorkspaceFormData) => {
+    setSlugSuggestions([]);
     try {
       const response = await checkSlugAvailability(slug);
       if (!response.available) {
@@ -62,6 +63,18 @@ const WorkspacesForm = ({ onWorkspaceCreated }: WorkspacesFormProps) => {
     }
   };
 
+  const handleSlugClick = (slug: string) => {
+    navigator.clipboard
+      .writeText(slug)
+      .then(() => {
+        toast.success(`Slug "${slug}" copied to clipboard!`);
+
+        setValue("slug", slug);
+      })
+      .catch((err) => {
+        console.error("Error copying slug to clipboard", err);
+      });
+  };
   return (
     <Card>
       <CardHeader>
@@ -76,7 +89,7 @@ const WorkspacesForm = ({ onWorkspaceCreated }: WorkspacesFormProps) => {
       />
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-          <div className={styles.formGroup}>
+          <div className={styles.inputGroup}>
             <label htmlFor="name">Workspace Name</label>
             <input
               id="name"
@@ -89,11 +102,9 @@ const WorkspacesForm = ({ onWorkspaceCreated }: WorkspacesFormProps) => {
             )}
           </div>
 
-          <div className={styles.formGroup}>
-            <div className={styles.formGroup}>
-              <label htmlFor="slug">Slug</label>
-              <WorkspaceSlugInput onSlugChange={setSlug} />
-            </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="slug">Slug</label>
+            <WorkspaceSlugInput onSlugChange={setSlug} />
           </div>
 
           <Button
@@ -105,14 +116,15 @@ const WorkspacesForm = ({ onWorkspaceCreated }: WorkspacesFormProps) => {
           </Button>
 
           {slugSuggestions.length > 0 && (
-            <div>
-              <h4>Slug suggestions:</h4>
-              <ul>
+            <div className={styles.slugSuggestionsContainer}>
+              <h4 className={styles.suggestionsHeader}>Slug Suggestions:</h4>
+              <ul className={styles.suggestionsList}>
                 {slugSuggestions.map((suggestion, index) => (
-                  <li key={index}>
+                  <li key={index} className={styles.suggestionItem}>
                     <button
                       type="button"
-                      onClick={() => setValue("slug", suggestion)}
+                      onClick={() => handleSlugClick(suggestion)}
+                      className={styles.suggestionButton}
                     >
                       {suggestion}
                     </button>

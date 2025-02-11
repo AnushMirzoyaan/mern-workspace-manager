@@ -27,3 +27,64 @@
 .icon {
   align-self: center;
 }
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
+
+  input {
+    border-radius: 10px;
+    border-width: 1px;
+    padding: 15px;
+    width: 100%;
+  }
+}
+
+.slugSuggestionsContainer {
+  background-color: #f9f9f9;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 12px;
+}
+
+.suggestionsHeader {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.suggestionsList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.suggestionItem {
+  margin-bottom: 8px;
+}
+
+.suggestionButton {
+  background: #e0e0e0;
+  border: none;
+  padding: 8px 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #d1d1d1;
+  }
+
+  &:focus {
+    outline: none;
+    background-color: #c1c1c1;
+  }
+}

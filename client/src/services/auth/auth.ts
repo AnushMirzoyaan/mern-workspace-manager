@@ -63,3 +63,11 @@ export const signUp = async (payload: any) => {
     throw new Error(errorMessage);
   }
 };
+
+export const logout = () => {
+  removeAuthToken();
+  localStorage.removeItem("user");
+  localStorage.removeItem("userId");
+
+  window.location.replace("/signin");
+};
