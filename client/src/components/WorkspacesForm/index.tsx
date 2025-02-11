@@ -49,8 +49,7 @@ const WorkspacesForm = ({ onWorkspaceCreated }: WorkspacesFormProps) => {
       }
 
       const createResponse = await createWorkspace(userId, data.name, slug);
-      
-      console.log(createResponse, '>>>>>>>>>>hee')
+
       if (createResponse.message) {
         toast.success("Workspace created successfully!");
         setWorkspaceCreated(true);
@@ -105,7 +104,6 @@ const WorkspacesForm = ({ onWorkspaceCreated }: WorkspacesFormProps) => {
             {isSubmitting ? "Creating..." : "Create Workspace"}
           </Button>
 
-          {/* Show slug suggestions if the slug is taken */}
           {slugSuggestions.length > 0 && (
             <div>
               <h4>Slug suggestions:</h4>
@@ -114,7 +112,7 @@ const WorkspacesForm = ({ onWorkspaceCreated }: WorkspacesFormProps) => {
                   <li key={index}>
                     <button
                       type="button"
-                      onClick={() => setValue("slug", suggestion)} // Set the suggested slug
+                      onClick={() => setValue("slug", suggestion)}
                     >
                       {suggestion}
                     </button>

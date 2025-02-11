@@ -13,16 +13,10 @@ const WorkspaceSlugInput = ({ onSlugChange }: WorkspaceSlugInputProps) => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [isAvailable, setIsAvailable] = useState(true);
 
-  // Function to call the API and check slug availability
   const checkSlug = async (slugToCheck: string) => {
     try {
-      console.log("Checking slug availability for:", slugToCheck);
-
       const { data } = await checkSlugAvailability(slugToCheck);
 
-      console.log("Received data from backend:", data);
-
-      console.log("API response:", data);
       if (data.available) {
         setIsAvailable(true);
         setSuggestions([]);
@@ -31,7 +25,6 @@ const WorkspaceSlugInput = ({ onSlugChange }: WorkspaceSlugInputProps) => {
         if (data.suggestions && data.suggestions.length > 0) {
           setSuggestions(data.suggestions);
         } else {
-          // Fallback suggestions if backend doesn't send any
           setSuggestions([`${slugToCheck}1`, `${slugToCheck}2`]);
         }
       }
@@ -40,7 +33,6 @@ const WorkspaceSlugInput = ({ onSlugChange }: WorkspaceSlugInputProps) => {
     }
   };
 
-  // Debounce the checkSlug function to avoid too many API calls
   const debouncedCheckSlug = useCallback(
     debounce((value: string) => {
       if (value) {
@@ -57,11 +49,9 @@ const WorkspaceSlugInput = ({ onSlugChange }: WorkspaceSlugInputProps) => {
     onSlugChange(newSlug);
   };
 
-  // When a suggestion is clicked, update the input and notify the parent
   const handleSuggestionClick = (suggestedSlug: string) => {
     setSlug(suggestedSlug);
     onSlugChange(suggestedSlug);
-    // Optionally re-check the slug here if needed
   };
 
   return (

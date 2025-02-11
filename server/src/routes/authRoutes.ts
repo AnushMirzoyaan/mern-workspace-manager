@@ -6,7 +6,6 @@ import { User } from "../models/User";
 const router = express.Router();
 
 router.post("/signup", async (req: any, res: any) => {
-  console.log("mtav signupi mej");
   try {
     const { fullName, email, password } = req.body;
 

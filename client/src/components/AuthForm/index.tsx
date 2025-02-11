@@ -28,7 +28,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
     setIsPasswordVisible(!isPasswordVisible);
   const toggleConfirmPasswordVisibility = () =>
     setIsConfirmPasswordVisible(!isConfirmPasswordVisible);
-  // const auth = useAuth();
 
   const router = useRouter();
 

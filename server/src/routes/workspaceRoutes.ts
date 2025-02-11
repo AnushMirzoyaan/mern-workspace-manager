@@ -5,10 +5,6 @@ const router = express.Router();
 
 router.post("/", async (req: any, res: any) => {
   const { name, slug, userId } = req.body;
-  console.log(
-    { name, slug, userId },
-    ">>>> Received workspace creation request"
-  );
 
   try {
     const existingWorkspace = await Workspace.findOne({ slug });
@@ -31,12 +27,10 @@ router.post("/", async (req: any, res: any) => {
       });
     }
 
-    console.log("stegh em ?>>>>>>>>>>>>>>>");
 
     const workspace = new Workspace({ name, slug, userId });
     await workspace.save();
 
-    console.log(workspace, "sarqec");
 
     return res.status(201).json({
       message: "Workspace created",
