@@ -47,9 +47,13 @@ const WorkspacesList = () => {
   }, [userId]);
 
   const handleEdit = (workspace: Workspace) => {
-    setEditingWorkspace(workspace._id);
-    setNewSlug(workspace.slug);
-    setName(workspace.name);
+    if (editingWorkspace === workspace._id) {
+      setEditingWorkspace(null);
+    } else {
+      setEditingWorkspace(workspace._id);
+      setNewSlug(workspace.slug);
+      setName(workspace.name);
+    }
   };
 
   const handleSave = async (workspaceId: string) => {
