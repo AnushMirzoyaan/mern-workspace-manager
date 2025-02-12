@@ -89,6 +89,7 @@ const WorkspacesForm = ({ onWorkspaceCreated }: WorkspacesFormProps) => {
               type="text"
               {...register("name", { required: "Workspace name is required" })}
               className={styles.input}
+              placeholder="Enter workspace name"
             />
             {errors.name && (
               <span className={styles.error}>{errors.name.message}</span>
@@ -102,7 +103,7 @@ const WorkspacesForm = ({ onWorkspaceCreated }: WorkspacesFormProps) => {
 
           <Button
             type="submit"
-            disabled={isSubmitting}
+            disabled={!slug || isSubmitting}
             className={styles.submitButton}
           >
             {isSubmitting ? "Creating..." : "Create Workspace"}

@@ -1,36 +1,90 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.workspaceList {
+  margin-top: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1rem;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  .workspaceList {
-    margin-top: 1rem;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
   }
-  
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 1rem;
-    
-    @media (min-width: 640px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    
-    @media (min-width: 1024px) {
-      grid-template-columns: repeat(3, 1fr);
-    }
+}
+
+.workspaceCard {
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-2px);
   }
-  
-  .workspaceCard {
-    transition: transform 0.2s ease-in-out;
-    
-    &:hover {
-      transform: translateY(-2px);
-    }
+}
+
+.slug {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.editContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.editContainer input {
+  width: 100%;
+  padding: 10px;
+  font-size: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    border-color: #3b82f6;
+    outline: none;
   }
-  
-  .slug {
-    color: #6b7280;
-    font-size: 0.875rem;
+
+  &:disabled {
+    background-color: #f3f4f6;
+    cursor: not-allowed;
   }
+}
+
+.editContainer button {
+  background-color: #528569;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 10px;
+
+  &:hover {
+    background-color: #90cfa5;
+    color: black;
+  }
+
+  &:disabled {
+    background-color: #528569;
+    color: white;
+    opacity: 70%;
+    cursor: auto;
+  }
+}

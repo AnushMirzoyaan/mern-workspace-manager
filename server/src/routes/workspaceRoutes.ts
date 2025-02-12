@@ -27,10 +27,8 @@ router.post("/", async (req: any, res: any) => {
       });
     }
 
-
     const workspace = new Workspace({ name, slug, userId });
     await workspace.save();
-
 
     return res.status(201).json({
       message: "Workspace created",
@@ -77,7 +75,7 @@ router.delete("/:id", async (req: any, res: any) => {
     if (!workspace) {
       return res.status(404).json({ message: "Workspace not found" });
     }
-    await workspace.remove();
+    await workspace.deleteOne();
     return res.json({ message: "Workspace deleted" });
   } catch (err) {
     console.error("Error deleting workspace:", err);

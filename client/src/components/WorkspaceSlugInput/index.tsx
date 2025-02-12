@@ -17,7 +17,7 @@ const WorkspaceSlugInput = ({ onSlugChange }: WorkspaceSlugInputProps) => {
     try {
       const { data } = await checkSlugAvailability(slugToCheck);
 
-      if (data.available) {
+      if (data && data.available) {
         setIsAvailable(true);
         setSuggestions([]);
       } else {

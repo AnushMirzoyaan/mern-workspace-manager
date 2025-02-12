@@ -52,3 +52,26 @@ export const checkSlugAvailability = async (slug: string) => {
     };
   }
 };
+
+export const updateWorkspace = async (id: string, workspaceData: any) => {
+  try {
+    const response = await axiosInstance.put(
+      `/workspaces/${id}`,
+      workspaceData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error updating workspace:", error);
+    throw error;
+  }
+};
+
+export const deleteWorkspace = async (id: string) => {
+  try {
+    const response = await axiosInstance.delete(`/workspaces/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting workspace:", error);
+    throw error;
+  }
+};

@@ -20,3 +20,12 @@
   padding: 1.5rem;
   padding-top: 0;
 }
+
+.actionWrapper {
+  display: flex;
+  gap: 5px;
+  margin: 5px;
+  .actionIcon {
+    cursor: pointer;
+  }
+}
